@@ -1,0 +1,4 @@
+/* These three lines activate Tailwind's styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

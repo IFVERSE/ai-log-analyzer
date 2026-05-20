@@ -1,0 +1,62 @@
+2026-05-14 00:00:01.023 INFO  [main] com.nexusapp.Application - Starting NexusApp v2.4.1 on PROD-SERVER-01
+2026-05-14 00:00:01.145 INFO  [main] com.nexusapp.config.DatabaseConfig - Initializing connection pool (size: 20)
+2026-05-14 00:00:01.892 INFO  [main] com.nexusapp.config.CacheConfig - Redis cache connected at redis://cache-01:6379
+2026-05-14 00:00:02.001 INFO  [main] com.nexusapp.Application - Application started successfully in 1.978s
+2026-05-14 00:01:15.334 INFO  [http-nio-1] com.nexusapp.api.AuthController - User login successful: user_id=10432
+2026-05-14 00:01:16.001 INFO  [http-nio-2] com.nexusapp.api.AuthController - User login successful: user_id=10433
+2026-05-14 00:02:45.112 WARNING [scheduler] com.nexusapp.jobs.ReportJob - Report generation taking longer than expected: 45s elapsed
+2026-05-14 00:03:01.998 INFO  [http-nio-3] com.nexusapp.api.PaymentController - Payment initiated: order_id=ORD-9981, amount=$245.00, user_id=10432
+2026-05-14 00:03:02.345 ERROR [http-nio-3] com.nexusapp.service.PaymentService - Payment gateway timeout after 30000ms: order_id=ORD-9981
+2026-05-14 00:03:02.346 ERROR [http-nio-3] com.nexusapp.service.PaymentService - Retrying payment gateway (attempt 1/3): order_id=ORD-9981
+2026-05-14 00:03:05.112 ERROR [http-nio-3] com.nexusapp.service.PaymentService - Retrying payment gateway (attempt 2/3): order_id=ORD-9981
+2026-05-14 00:03:08.001 ERROR [http-nio-3] com.nexusapp.service.PaymentService - Retrying payment gateway (attempt 3/3): order_id=ORD-9981
+2026-05-14 00:03:08.002 CRITICAL [http-nio-3] com.nexusapp.service.PaymentService - Payment gateway unreachable after 3 retries: order_id=ORD-9981
+2026-05-14 00:03:08.003 ERROR [http-nio-3] com.nexusapp.api.PaymentController - Payment failed for user_id=10432: GatewayUnavailableException
+2026-05-14 00:03:08.112 WARNING [http-nio-3] com.nexusapp.service.NotificationService - Failed to send payment failure email to user_id=10432
+2026-05-14 00:04:22.445 WARNING [monitor] com.nexusapp.monitor.MemoryMonitor - Heap memory usage at 78%: 3.1GB/4GB
+2026-05-14 00:05:01.334 INFO  [http-nio-4] com.nexusapp.api.ProductController - Product search: query="laptop", results=142, user_id=10433
+2026-05-14 00:05:02.998 WARNING [db-pool-1] com.nexusapp.db.ConnectionPool - Database connection pool at 85% capacity (17/20 connections in use)
+2026-05-14 00:05:15.001 ERROR [db-pool-2] com.nexusapp.db.ConnectionPool - Failed to acquire database connection after 5000ms timeout
+2026-05-14 00:05:15.002 ERROR [http-nio-5] com.nexusapp.api.UserController - Cannot process request for user_id=10434: DatabaseConnectionException
+2026-05-14 00:05:15.445 ERROR [db-pool-3] com.nexusapp.db.ConnectionPool - Failed to acquire database connection after 5000ms timeout
+2026-05-14 00:05:15.446 ERROR [http-nio-6] com.nexusapp.api.OrderController - Cannot process request for order_id=ORD-9982: DatabaseConnectionException
+2026-05-14 00:05:16.001 CRITICAL [db-pool-monitor] com.nexusapp.db.ConnectionPool - All database connections exhausted (20/20 in use)
+2026-05-14 00:05:16.002 CRITICAL [http-nio-7] com.nexusapp.api.AuthController - Login failed for user_id=10435: DatabaseConnectionException
+2026-05-14 00:05:16.334 ERROR [scheduler] com.nexusapp.jobs.ReportJob - Report generation failed: DatabaseConnectionException after 76s
+2026-05-14 00:05:17.001 WARNING [monitor] com.nexusapp.monitor.MemoryMonitor - Heap memory usage at 91%: 3.64GB/4GB - CRITICAL THRESHOLD
+2026-05-14 00:05:17.445 ERROR [gc-thread] com.nexusapp.runtime.GarbageCollector - Full GC triggered: pausing all threads for 3200ms
+2026-05-14 00:05:20.645 WARNING [gc-thread] com.nexusapp.runtime.GarbageCollector - GC completed but memory still at 88%: 3.52GB/4GB
+2026-05-14 00:05:21.001 CRITICAL [http-nio-8] com.nexusapp.api.CartController - NullPointerException at CartService.java:182
+java.lang.NullPointerException: Cannot invoke method getItems() on null object
+    at com.nexusapp.service.CartService.calculateTotal(CartService.java:182)
+    at com.nexusapp.api.CartController.checkout(CartController.java:94)
+    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+2026-05-14 00:05:21.112 CRITICAL [http-nio-9] com.nexusapp.api.CartController - NullPointerException at CartService.java:182
+2026-05-14 00:05:21.334 CRITICAL [http-nio-10] com.nexusapp.api.CartController - NullPointerException at CartService.java:182
+2026-05-14 00:05:22.001 ERROR [security] com.nexusapp.security.RateLimiter - Rate limit exceeded for IP: 192.168.1.105 (500 requests/min)
+2026-05-14 00:05:22.002 WARNING [security] com.nexusapp.security.RateLimiter - Possible DDoS attack detected from IP: 192.168.1.105
+2026-05-14 00:05:22.445 ERROR [security] com.nexusapp.security.RateLimiter - Rate limit exceeded for IP: 192.168.1.106 (480 requests/min)
+2026-05-14 00:05:23.001 CRITICAL [main] com.nexusapp.Application - OutOfMemoryError: Java heap space
+java.lang.OutOfMemoryError: Java heap space
+    at com.nexusapp.cache.CacheManager.store(CacheManager.java:334)
+    at com.nexusapp.service.ProductService.cacheResults(ProductService.java:201)
+2026-05-14 00:05:23.112 CRITICAL [main] com.nexusapp.Application - Unhandled exception - initiating emergency shutdown
+2026-05-14 00:05:23.334 INFO  [shutdown-hook] com.nexusapp.Application - Closing 847 active user sessions
+2026-05-14 00:05:23.445 INFO  [shutdown-hook] com.nexusapp.Application - Flushing pending transactions (12 orders affected)
+2026-05-14 00:05:23.556 ERROR [shutdown-hook] com.nexusapp.db.ConnectionPool - Failed to flush 3 pending transactions during shutdown
+2026-05-14 00:05:23.667 INFO  [shutdown-hook] com.nexusapp.Application - Releasing database connections
+2026-05-14 00:05:24.001 INFO  [shutdown-hook] com.nexusapp.Application - Application stopped after 23m 22s uptime
+2026-05-14 00:05:24.112 INFO  [watchdog] com.nexusapp.watchdog.AppWatchdog - Crash detected - initiating auto-restart in 10s
+2026-05-14 00:05:34.001 INFO  [main] com.nexusapp.Application - Starting NexusApp v2.4.1 on PROD-SERVER-01 (restart #1)
+2026-05-14 00:05:35.334 ERROR [main] com.nexusapp.config.DatabaseConfig - Failed to initialize connection pool: too many connections to database
+2026-05-14 00:05:35.335 CRITICAL [main] com.nexusapp.Application - Startup failed - cannot connect to database
+2026-05-14 00:05:35.336 INFO  [watchdog] com.nexusapp.watchdog.AppWatchdog - Restart failed - retrying in 30s
+2026-05-14 00:06:05.001 INFO  [main] com.nexusapp.Application - Starting NexusApp v2.4.1 on PROD-SERVER-01 (restart #2)
+2026-05-14 00:06:06.112 INFO  [main] com.nexusapp.config.DatabaseConfig - Connection pool initialized (size: 20)
+2026-05-14 00:06:06.334 INFO  [main] com.nexusapp.Application - Application started successfully in 1.333s
+2026-05-14 00:06:07.001 WARNING [monitor] com.nexusapp.monitor.MemoryMonitor - Heap memory usage already at 45% on fresh start - possible memory leak
+2026-05-14 00:07:12.334 INFO  [http-nio-1] com.nexusapp.api.AuthController - User login successful: user_id=10436
+2026-05-14 00:07:45.001 WARNING [db-pool-1] com.nexusapp.db.ConnectionPool - Database connection pool at 70% capacity (14/20 connections in use)
+2026-05-14 00:08:01.112 ERROR [http-nio-2] com.nexusapp.service.PaymentService - Payment gateway timeout after 30000ms: order_id=ORD-9983
+2026-05-14 00:08:01.113 CRITICAL [http-nio-2] com.nexusapp.service.PaymentService - Payment gateway still unreachable after restart
+2026-05-14 00:08:15.334 WARNING [monitor] com.nexusapp.monitor.MemoryMonitor - Heap memory usage at 67%: 2.68GB/4GB - memory leak confirmed
