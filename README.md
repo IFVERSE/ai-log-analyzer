@@ -217,14 +217,14 @@ Click **"History"** in the sidebar to see all your previous log analyses.
 
 Two sample log files are included to test the app:
 
-### Simple Test (`test.log`)
+### Simple Test (`sample.log`)
 ```
 2026-05-14 10:00:01 INFO Server started
 2026-05-14 10:00:05 ERROR Database connection failed
 2026-05-14 10:00:06 CRITICAL Application crashed
 ```
 
-### Complex Test (`complex-test.log`)
+### Complex Test (`sample.log`)
 
 A realistic 60-line log showing:
 - Payment gateway failures
@@ -235,7 +235,8 @@ A realistic 60-line log showing:
 - NullPointerException bug
 - Memory leak after restart
 
-Upload `complex-test.log` to see the full power of the analyzer.
+Upload `c
+sample.log` to see the full power of the analyzer.
 
 ---
 
